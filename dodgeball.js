@@ -104,12 +104,15 @@ const listPeopleChoices = () => {
 // add a player to the list of dodge ball players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
-  li = document.getElementById(id);
-  li.parentNode.removeChild(li);
 
-  let newPlayer = new Player(this.id, this.name, this.placeBorn);
-  newPlayer.push(listOfPlayers);
-  listOfPlayers();
+  arrOfPeople.map(person => {
+    if (id === person.id) {
+      let newPlayer = new Player(person.id, person.name, person.placeBorn);
+      listOfPlayers.push(newPlayer);
+      console.log(id + " was added to listOfPlayers");
+      console.log(listOfPlayers);
+    }
+  })
 }
 
 // displays list of people who have been selected to be dodge ball players
