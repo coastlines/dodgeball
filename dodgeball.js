@@ -74,19 +74,9 @@ class Teammate extends Player {
   }
 }
 
-// class dodgeBallPlayer {
-//   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
-//     this.canThrowBall = null;
-//     this.canDodgeBall = null;
-//     this.hasPaid = null;
-//     this.isHealthy = null;
-//     this.yearsExperience = null;
-//   }
-// }
-
 // FUNCTIONS //
 
-// displays list of people who can be made into players
+// DOM: Displays the list of people on the dom
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
   if (!listElement.hasChildNodes()) {
@@ -102,16 +92,12 @@ const listPeopleChoices = () => {
   } else {
     return false;
   }
-  
 }
 
 
-// add a player to the list of dodge ball players
+// ARRAY: Add people to the list of players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
-  // li = document.getElementById(id);
-  // li.parentNode.removeChild(li);
-
 
   arrOfPeople.map(person => {
       if (id == person.id) {
@@ -128,7 +114,7 @@ const makePlayer = (id) => {
   });
 }
 
-// displays list of people who have been selected to be dodge ball players
+// DOM: Display dodge ball players not assigned to a team
 const listPlayerChoices = (person) => {
   const listElement = document.getElementById('players')
   const li = document.createElement("li")
@@ -144,46 +130,23 @@ const listPlayerChoices = (person) => {
   listElement.append(li)
 }
 
-//add a player to a team
-const makeTeammate = (id,color) => {
-  //console.log(`li ${id} was clicked!`)
-  // li = document.getElementById(id);
-  // li.parentNode.removeChild(li);
-  console.log(id, color);
-
-  listOfPlayers.map(person => {
-    if (color ==='Blue') {
-        mascot = "Bluejays"
-        let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
-        blueTeam.push(newTeammate);
-        console.log(id + " was added to Blue Team");
-      } else {
-        mascot = "Cardinals"
-        let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
-        redTeam.push(newTeammate);
-        //listPlayerChoices(person);
-        console.log(id + " was added to Red Team");
-      }
-    });
-    console.log(blueTeam);
-    
-  // arrOfPeople.filter((person) => {
-  //   person.id != id;
-  // });
-}
-
-// // displays players by team assignment
+// DOM: Display dodge ball players assigned to the blue team
 const listBlueTeam = (person) => {
-  const listElement = document.getElementById('blue')
-  const li = document.createElement("li")
-  const redTeamBtn = document.createElement("button")
-  redTeamBtn.innerHTML = "Red Team"
-  redTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Red')} )
-  const blueTeamBtn = document.createElement("button")
-  blueTeamBtn.innerHTML = "Blue Team"
-  blueTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Blue')} )
-  li.appendChild(redTeamBtn)
-  li.appendChild(blueTeamBtn)
-  li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
-  listElement.append(li)
+  blueTeam.map(person => {
+    const listElement = document.getElementById('blue')
+    const li = document.createElement("li")
+    li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
+    listElement.append(li)
+  })
 }
+
+// DOM: Display dodge ball players assigned to the red team
+const listRedTeam = (person) => {
+  redTeam.map(person => {
+    const listElement = document.getElementById('red')
+    const li = document.createElement("li")
+    li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
+    listElement.append(li)
+  })
+}
+
