@@ -1,3 +1,5 @@
+// INITIAL PLAYERS //
+
 const arrOfPeople = [
   {
     id: 2,
@@ -50,20 +52,26 @@ const arrOfPeople = [
   },
 ]
 
+// NEW ARRAYS //
 const listOfPlayers = []
 const blueTeam = []
 const redTeam = []
 
-class player {
-  constructor(){
-    
+// CLASS CONSTRUCTORS //
+class Player {
+  constructor(id, name, placeBorn){
+    this.id = id;
+    this.name = name;
+    this.placeBorn = placeBorn;
   }
 }
-class blueTeammate {
-  constructor(){}
-}
-class redTeammate {
-  constructor(){}
+
+class Teammate extends Player {
+  constructor(id, name, placeBorn, color, mascot){
+    super(id, name, placeBorn);
+    this.color = color;
+    this.mascot = mascot;
+  }
 }
 
 class dodgeBallPlayer {
@@ -75,6 +83,8 @@ class dodgeBallPlayer {
     this.yearsExperience = null;
   }
 }
+
+// FUNCTIONS //
 
 // displays list of people who can be made into players
 const listPeopleChoices = () => {
@@ -94,10 +104,28 @@ const listPeopleChoices = () => {
 // add a player to the list of dodge ball players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
+  li = document.getElementById(id);
+  li.parentNode.removeChild(li);
+
+  let newPlayer = new Player(this.id, this.name, this.placeBorn);
+  newPlayer.push(listOfPlayers);
+  listOfPlayers();
 }
 
 // displays list of people who have been selected to be dodge ball players
-
+const listPlayerChoices = () => {
+  const listElement = document.getElementById('players')
+  listOfPlayers.map(person => {
+    const li = document.createElement("li")
+    const button = document.createElement("button")
+    button.innerHTML = "Red Team"
+    button.innerHTML = "Blue Team"
+    button.addEventListener('click', function() {makeTeammate(person.id)} )
+    li.appendChild(button)
+    li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
+    listElement.append(li)
+  })
+}
 
 // add a player to a team
 
