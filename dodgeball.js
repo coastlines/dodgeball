@@ -91,12 +91,15 @@ const listPeopleChoices = () => {
 }
 
 
-
+// add a player to the list of dodge ball players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
 }
 
 // displays list of people who have been selected to be dodge ball players
+
+
+// add a player to a team
 
 
 // displays players by team assignment
