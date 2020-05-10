@@ -1,3 +1,4 @@
+"use strict"
 // INITIAL PLAYERS //
 
 const arrOfPeople = [
@@ -79,9 +80,13 @@ class Teammate extends Player {
 // DOM: Display list of people 
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
-  if (!listElement.hasChildNodes()) {
+
+  // prevent duplicates from being displayed
+  if (!listElement.hasChildNodes()) { 
     arrOfPeople.map(person => {
       const li = document.createElement("li")
+      // create li id based on person id
+      li.id = person.id 
       const button = document.createElement("button")
       button.innerHTML = "Make Player"
       button.addEventListener('click', function() {makePlayer(person.id)} )
@@ -89,81 +94,102 @@ const listPeopleChoices = () => {
       li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
       listElement.append(li)
     })
-  } else {
-    return false;
-  }
-  
+  }  
 }
-
 
 // ARRAY: Add a person to the list of players
 const makePlayer = (id) => {
-  console.log(`li ${id} was clicked!`)
-  // li = document.getElementById(id);
-  // li.parentNode.removeChild(li);
+  arrOfPeople.filter(person => {
+    if (id === person.id) {
+      let newPlayer = new Player(person.id, person.name, person.placeBorn);
+      listOfPlayers.push(newPlayer);
+      console.log(id + " was added to listOfPlayers");
+      console.log(listOfPlayers);
+      console.log(this.NewPlayer);
+      return this.newPlayer;
+    }
+  })
+  listPlayerChoices(id);
+}
 
-  arrOfPeople.map(person => {
-      if (id == person.id) {
-        let newPlayer = new Player(person.id, person.name, person.placeBorn);
-        listOfPlayers.push(newPlayer);
-        listPlayerChoices(person);
-        console.log(id + " was added to listOfPlayers");
-        console.log(listOfPlayers);
-      } else false
-    });
-
-  arrOfPeople.filter((person) => {
-    person.id != id;
-  });
+// DOM: Remove li element
+const removeLi = (id) => {
+  let li = document.getElementById(id);
+  li.parentNode.removeChild(li);
 }
 
 // DOM: Display list of available players
 const listPlayerChoices = (person) => {
-  const listElement = document.getElementById('players')
-  const li = document.createElement("li")
-  const redTeamBtn = document.createElement("button")
-  redTeamBtn.innerHTML = "Red Team"
-  redTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Red')} )
-  const blueTeamBtn = document.createElement("button")
-  blueTeamBtn.innerHTML = "Blue Team"
-  blueTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Blue')} )
-  li.appendChild(redTeamBtn)
-  li.appendChild(blueTeamBtn)
-  li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
-  listElement.append(li)
+  let personId = person;
+
+  listOfPlayers
+    .filter(person => person.id === personId)
+    .map(person  => {
+    const listElement = document.getElementById('players')
+    const li = document.createElement("li")
+    li.id = person.id
+
+    const blueTeamBtn = document.createElement("button");
+    blueTeamBtn.innerHTML = "Blue Team";
+    blueTeamBtn.addEventListener('click', function() {makeTeammate(person.id, "Blue Team", 'Bluejays')} );
+
+    const redTeamBtn = document.createElement("button");
+    redTeamBtn.innerHTML = "Red Team";
+    redTeamBtn.addEventListener('click', function() {makeTeammate(person.id, "Red Team", 'Cardinals')} );
+
+    li.appendChild(blueTeamBtn)
+    li.appendChild(redTeamBtn)
+    li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
+    listElement.append(li)
+  })
+  removeLi(person);
 }
 
+// // DOM: Display dodge ball players not assigned to a team
+// const listPlayerChoices = (person) => {
+//   removeLi(person);
+
+//   const listElement = document.getElementById('players')
+//     listOfPlayers.filter(person  => {
+//       const li = document.createElement("li")
+//       const redTeamBtn = document.createElement("button")
+//       redTeamBtn.innerHTML = "Red Team"	 
+//       redTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Red')} )
+//       const blueTeamBtn = document.createElement("button")
+//       blueTeamBtn.innerHTML = "Blue Team"	
+//       blueTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Blue')} )
+//       li.appendChild(blueTeamBtn)
+//       li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))	
+//       listElement.append(li)
+//     }) 
+  
+// }	
+
+
 // ARRAY: Add a player to a team
-const makeTeammate = (id,color) => {
-  //console.log(`li ${id} was clicked!`)
-  // li = document.getElementById(id);
-  // li.parentNode.removeChild(li);
-  console.log(id, color);
+const makeTeammate = (id, color, mascot) => {
+  console.log(id, color, mascot);
 
   listOfPlayers.map(person => {
-    if (color === 'Blue') {
-        mascot = "Bluejays"
-        let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
+
+    if (color == "Blue Team") { 
+      let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
         blueTeam.push(newTeammate);
-        listBlueTeam(person);
         console.log(id + " was added to Blue Team");
-      } else if (color === 'Red') {
-        mascot = "Cardinals"
+        listBlueTeam();
+
+      } else if (color == "Red Team") {
         let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
         redTeam.push(newTeammate);
-        //listPlayerChoices(person);
         console.log(id + " was added to Red Team");
         listRedTeam(person);
       }
+
     });
     console.log(blueTeam);
     console.log(listOfPlayers);
-    console.log(listPlayerChoices);
     console.log(arrOfPeople);
-  // arrOfPeople.filter((person) => {
-  //   person.id != id;
-  // });
-}
+};
 
 // DOM: Display blue team
 const listBlueTeam = (person) => {
@@ -173,7 +199,7 @@ const listBlueTeam = (person) => {
     li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
     listElement.append(li)
   })
-}
+};
 
 // DOM: Display red team
 const listRedTeam = (person) => {
@@ -183,5 +209,5 @@ const listRedTeam = (person) => {
     li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
     listElement.append(li)
   })
-}
+};
 

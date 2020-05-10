@@ -10,8 +10,8 @@
 2. Then *display them in the DOM* in the available players to pick list -- DONE
 
 # THREE 
-1. Add a *button* to each new player that will allow each *player to be selected* for either Blue Team or Read Team 
-2. Each player should receive a *mascot and teamColor*
+1. Add a *button* to each new player that will allow each *player to be selected* for either Blue Team or Read Team -- DONE
+2. Each player should receive a *mascot and teamColor* -- DONE
 
 # FOUR
 1. Use the *this* keyword to assign each player to a team with an *onclick*. 
