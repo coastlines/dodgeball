@@ -76,6 +76,7 @@ class dodgeBallPlayer {
   }
 }
 
+// displays list of people who can be made into players
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
   arrOfPeople.map(person => {
@@ -89,6 +90,13 @@ const listPeopleChoices = () => {
   })
 }
 
+
+
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
 }
+
+// displays list of people who have been selected to be dodge ball players
+
+
+// displays players by team assignment
