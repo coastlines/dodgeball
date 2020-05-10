@@ -76,7 +76,7 @@ class Teammate extends Player {
 
 // FUNCTIONS //
 
-// DOM: Displays the list of people on the dom
+// DOM: Display list of people 
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
   if (!listElement.hasChildNodes()) {
@@ -92,12 +92,15 @@ const listPeopleChoices = () => {
   } else {
     return false;
   }
+  
 }
 
 
-// ARRAY: Add people to the list of players
+// ARRAY: Add a person to the list of players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
+  // li = document.getElementById(id);
+  // li.parentNode.removeChild(li);
 
   arrOfPeople.map(person => {
       if (id == person.id) {
@@ -114,7 +117,7 @@ const makePlayer = (id) => {
   });
 }
 
-// DOM: Display dodge ball players not assigned to a team
+// DOM: Display list of available players
 const listPlayerChoices = (person) => {
   const listElement = document.getElementById('players')
   const li = document.createElement("li")
@@ -130,7 +133,39 @@ const listPlayerChoices = (person) => {
   listElement.append(li)
 }
 
-// DOM: Display dodge ball players assigned to the blue team
+// ARRAY: Add a player to a team
+const makeTeammate = (id,color) => {
+  //console.log(`li ${id} was clicked!`)
+  // li = document.getElementById(id);
+  // li.parentNode.removeChild(li);
+  console.log(id, color);
+
+  listOfPlayers.map(person => {
+    if (color === 'Blue') {
+        mascot = "Bluejays"
+        let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
+        blueTeam.push(newTeammate);
+        listBlueTeam(person);
+        console.log(id + " was added to Blue Team");
+      } else if (color === 'Red') {
+        mascot = "Cardinals"
+        let newTeammate = new Teammate(person.id, person.name, person.placeBorn, color, mascot);
+        redTeam.push(newTeammate);
+        //listPlayerChoices(person);
+        console.log(id + " was added to Red Team");
+        listRedTeam(person);
+      }
+    });
+    console.log(blueTeam);
+    console.log(listOfPlayers);
+    console.log(listPlayerChoices);
+    console.log(arrOfPeople);
+  // arrOfPeople.filter((person) => {
+  //   person.id != id;
+  // });
+}
+
+// DOM: Display blue team
 const listBlueTeam = (person) => {
   blueTeam.map(person => {
     const listElement = document.getElementById('blue')
@@ -140,7 +175,7 @@ const listBlueTeam = (person) => {
   })
 }
 
-// DOM: Display dodge ball players assigned to the red team
+// DOM: Display red team
 const listRedTeam = (person) => {
   redTeam.map(person => {
     const listElement = document.getElementById('red')
