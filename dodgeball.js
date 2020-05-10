@@ -74,15 +74,15 @@ class Teammate extends Player {
   }
 }
 
-class dodgeBallPlayer {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
-    this.canThrowBall = null;
-    this.canDodgeBall = null;
-    this.hasPaid = null;
-    this.isHealthy = null;
-    this.yearsExperience = null;
-  }
-}
+// class dodgeBallPlayer {
+//   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+//     this.canThrowBall = null;
+//     this.canDodgeBall = null;
+//     this.hasPaid = null;
+//     this.isHealthy = null;
+//     this.yearsExperience = null;
+//   }
+// }
 
 // FUNCTIONS //
 
@@ -104,21 +104,23 @@ const listPeopleChoices = () => {
 // add a player to the list of dodge ball players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
+  
 
-  arrOfPeople.map(person => {
+arrOfPeople.map(person => {
     if (id === person.id) {
       let newPlayer = new Player(person.id, person.name, person.placeBorn);
       listOfPlayers.push(newPlayer);
       console.log(id + " was added to listOfPlayers");
       console.log(listOfPlayers);
     } else false
-  })
+  } )
+  listPlayerChoices();
 }
 
 // displays list of people who have been selected to be dodge ball players
 const listPlayerChoices = () => {
   const listElement = document.getElementById('players')
-  listOfPlayers.map(person => {
+  listOfPlayers.map(person  => {
     const li = document.createElement("li")
     const button = document.createElement("button")
     button.innerHTML = "Red Team"
