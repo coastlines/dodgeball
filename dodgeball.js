@@ -123,6 +123,7 @@ const listPlayerChoices = (person) => {
   listOfPlayers
     .filter(person => person.id === personId)
     .map(person  => {
+
     const listElement = document.getElementById('players')
     const li = document.createElement('li')
     li.id = person.id
@@ -153,26 +154,22 @@ const makeTeammate = (id, team, mascot) => {
     .map(player => {
       if (team === 'Blue Team') { 
         let newTeammate = new Teammate(player.id, player.name, player.placeBorn, team, mascot);
-          blueTeam.push(newTeammate);
-          listBlueTeam(player);
-
-        } else if (team === 'Red Team') {
-          let newTeammate = new Teammate(player.id, player.name, player.placeBorn, team, mascot);
-          redTeam.push(newTeammate);
-          listRedTeam(player);
-        }
-
-      });
-    console.log(blueTeam);
-    console.log(redTeam);
-    console.log(listOfPlayers);
-    console.log(arrOfPeople);
-    removeLi(id);
+        blueTeam.push(newTeammate);
+        listBlueTeam(player);
+      }
+      else if (team === 'Red Team') {
+        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, team, mascot);
+        redTeam.push(newTeammate);
+        listRedTeam(player);
+      }
+  });
+  removeLi(id);
 };
 
 // DOM: Display blue team
 const listBlueTeam = (player) => {
   let playerId = player.id;
+
   blueTeam
     .filter(player => player.id === playerId)
     .map(player => {
@@ -186,6 +183,7 @@ const listBlueTeam = (player) => {
 // DOM: Display red team
 const listRedTeam = (player) => {
   let playerId = player.id;
+  
   redTeam
     .filter(player => player.id === playerId)
     .map(player => {
