@@ -1,9 +1,9 @@
 # dodgeball
 
 # ONE 
-1. Use the *class keyword* to create a template of a *dodgeBallPlayer* -- DONE
+1. Use the *class keyword* to create a template of a *Player + Teammate* -- DONE
    that requires:
-    * canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience 
+    * canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience (this can vary)
 
 # TWO
 1. *Push* these new dodge ball *Player objects* into a *new array*  -- DONE
