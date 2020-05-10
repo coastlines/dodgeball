@@ -84,12 +84,14 @@ const listPeopleChoices = () => {
   // prevent duplicates from being displayed
   if (!listElement.hasChildNodes()) { 
     arrOfPeople.map(person => {
+
       const li = document.createElement("li")
-      // create li id based on person id
-      li.id = person.id 
+      li.id = person.id // create li id based on person id
+
       const button = document.createElement("button")
       button.innerHTML = "Make Player"
       button.addEventListener('click', function() {makePlayer(person.id)} )
+
       li.appendChild(button)
       li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
       listElement.append(li)
@@ -103,10 +105,6 @@ const makePlayer = (id) => {
     if (id === person.id) {
       let newPlayer = new Player(person.id, person.name, person.placeBorn);
       listOfPlayers.push(newPlayer);
-      console.log(id + " was added to listOfPlayers");
-      console.log(listOfPlayers);
-      console.log(this.NewPlayer);
-      return this.newPlayer;
     }
   })
   listPlayerChoices(id);
