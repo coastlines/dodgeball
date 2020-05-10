@@ -1,13 +1,13 @@
 # dodgeball
 
 # ONE 
-1. Use the *class keyword* to create a template of a *dodgeBallPlayer*
+1. Use the *class keyword* to create a template of a *dodgeBallPlayer* -- DONE
    that requires:
     * canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience 
 
 # TWO
-1. *Push* these new dodge ball *Player objects* into a *new array* 
-2. Then *display them in the DOM* in the available players to pick list
+1. *Push* these new dodge ball *Player objects* into a *new array*  -- DONE
+2. Then *display them in the DOM* in the available players to pick list -- DONE
 
 # THREE 
 1. Add a *button* to each new player that will allow each *player to be selected* for either Blue Team or Read Team 

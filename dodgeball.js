@@ -89,47 +89,49 @@ class Teammate extends Player {
 // displays list of people who can be made into players
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
-  arrOfPeople.map(person => {
-    const li = document.createElement("li")
-    const button = document.createElement("button")
-    button.innerHTML = "Make Player"
-    button.addEventListener('click', function() {makePlayer(person.id)} )
-    li.appendChild(button)
-    li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
-    listElement.append(li)
-  })
+  if (!listElement.hasChildNodes()) {
+    arrOfPeople.map(person => {
+      const li = document.createElement("li")
+      const button = document.createElement("button")
+      button.innerHTML = "Make Player"
+      button.addEventListener('click', function() {makePlayer(person.id)} )
+      li.appendChild(button)
+      li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+      listElement.append(li)
+    })
+  } else {
+    return false;
+  }
+  
 }
 
 
 // add a player to the list of dodge ball players
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
-  
 
 arrOfPeople.map(person => {
     if (id === person.id) {
       let newPlayer = new Player(person.id, person.name, person.placeBorn);
       listOfPlayers.push(newPlayer);
+      listPlayerChoices(person);
       console.log(id + " was added to listOfPlayers");
       console.log(listOfPlayers);
     } else false
   } )
-  listPlayerChoices();
 }
 
 // displays list of people who have been selected to be dodge ball players
-const listPlayerChoices = () => {
+const listPlayerChoices = (person) => {
   const listElement = document.getElementById('players')
-  listOfPlayers.map(person  => {
-    const li = document.createElement("li")
-    const button = document.createElement("button")
-    button.innerHTML = "Red Team"
-    button.innerHTML = "Blue Team"
-    button.addEventListener('click', function() {makeTeammate(person.id)} )
-    li.appendChild(button)
-    li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
-    listElement.append(li)
-  })
+  const li = document.createElement("li")
+  const button = document.createElement("button")
+  button.innerHTML = "Red Team"
+  button.innerHTML = "Blue Team"
+  button.addEventListener('click', function() {makeTeammate(person.id)} )
+  li.appendChild(button)
+  li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
+  listElement.append(li)
 }
 
 // add a player to a team
