@@ -146,8 +146,7 @@ const listPlayerChoices = (person) => {
 
 // ARRAY: Add a player to a team
 const makeTeammate = (id, team, mascot) => {
- // console.log(id, team, mascot);
- let playerId = id;
+  let playerId = id;
 
   listOfPlayers
     .filter(player => player.id === playerId)
@@ -183,7 +182,7 @@ const listBlueTeam = (player) => {
 // DOM: Display red team
 const listRedTeam = (player) => {
   let playerId = player.id;
-  
+
   redTeam
     .filter(player => player.id === playerId)
     .map(player => {
@@ -193,4 +192,3 @@ const listRedTeam = (player) => {
       listElement.append(li)
     })
 };
-
