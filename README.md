@@ -37,3 +37,12 @@
 * Change the *color* of the text for each color based on the color of their team! -- DONE
 * Make a button to *remove Players from Teams* and back to the Players list. -- maybe
 * Make a button to *remove Player from the Players List* and move them into the People List. -- maybe
+
+
+# Unit Tests
+Unit test outlines are included at the bottom of dodgeball.js
+
+1. listPeopleChoices() should not generate duplicate players that have already been assigned as a player, teammate or are pending in the people list.
+2. After a person has been added to the players list, they should be removed from the list of persons in the DOM.
+3. The Player class should set dodgeball skills to true upon instantiation.
+4. Players should populate on the DOM with buttons that allow the player to join either the red or blue team.
