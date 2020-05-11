@@ -46,3 +46,9 @@ Unit test outlines are included at the bottom of dodgeball.js
 2. After a person has been added to the players list, they should be removed from the list of persons in the DOM.
 3. The Player class should set dodgeball skills to true upon instantiation.
 4. Players should populate on the DOM with buttons that allow the player to join either the red or blue team.
+5. Players should populate on the DOM with their hometown value, rather than skill.
+6. When a player is assigned to a team they should receive a team and mascot assignment.
+7. After a person has been added to a team, they should be removed from the list of players in the DOM.
+8. After a person has been added to a team list, they should be removed from the list of players in the DOM.
+9. Teammates should populate on the DOM with just their name.
+10. People, players or teammates should only appear once in each array.

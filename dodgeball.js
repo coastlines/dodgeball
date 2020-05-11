@@ -187,7 +187,7 @@ const listBlueTeam = (player) => {
     .map(player => {
       const listElement = document.getElementById('blue')
       const li = document.createElement("li")
-      li.appendChild(document.createTextNode(player.name + " - " + player.placeBorn))
+      li.appendChild(document.createTextNode(player.name))
       listElement.append(li)
     })
 };
@@ -201,7 +201,7 @@ const listRedTeam = (player) => {
     .map(player => {
       const listElement = document.getElementById('red')
       const li = document.createElement("li")
-      li.appendChild(document.createTextNode(player.name + " - " + player.placeBorn))
+      li.appendChild(document.createTextNode(player.name))
       listElement.append(li)
     })
 };
