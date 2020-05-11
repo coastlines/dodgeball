@@ -1,0 +1,69 @@
+body {
+  background-color: pink;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h4, p, ul, li {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h4 {
+  font-size: 2em;
+  text-align: center;
+}
+
+p {
+  font-size: 1.4em;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-self: center;
+  padding: 10px;
+  border: 1px solid lightcoral;
+}
+
+button {
+  padding: 7px 8px;
+  border: none;
+  color: white;
+  background-color: black;
+  margin: 5px 0px 5px 10px
+}
+
+.redBtn {
+  background-color: red;
+}
+
+.blueBtn {
+  background-color: blue;
+}
+
+#red li {
+  background-color: crimson;
+  border: 1px solid #fff;
+}
+
+#blue li {
+  background-color: dodgerblue;
+  border: 1px solid #fff;
+}
+
+div, #listBtn {
+  max-width: 600px;
+  margin-left: -30px;
+}

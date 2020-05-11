@@ -1,7 +1,7 @@
 # dodgeball
 
 # ONE 
-1. Use the *class keyword* to create a template of a *Player + Teammate* -- DONE
+1. Use the *class keyword* to create a template of a *Player* -- DONE
    that requires:
     * canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience (this can vary)
 
@@ -20,10 +20,7 @@
 1. *Display the two teams in a new list* in the DOM with appropriate titles. -- DONE
 
 # SIX
-1. Create *3 tests* for your application.  
-    * Use Mocha and Chai to prove:
-      * a person becomes a player
-      * a player becomes a teammate
+1. Create *3 tests* for your application. 
 
 # EXTRA
 * Add an *input* at the top of the Window that allows for a user to add new people! -- nope

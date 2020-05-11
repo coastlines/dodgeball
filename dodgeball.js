@@ -60,16 +60,18 @@ const redTeam = []
 
 // CLASS CONSTRUCTORS //
 class Player {
-  constructor(id, name, placeBorn){
+  constructor(id, name, placeBorn, canThrowBall, canDodgeBall){
     this.id = id;
     this.name = name;
     this.placeBorn = placeBorn;
+    this.canThrowBall = canThrowBall;
+    this.canDodgeBall = canThrowBall;
   }
 }
 
 class Teammate extends Player {
-  constructor(id, name, placeBorn, team, mascot){
-    super(id, name, placeBorn);
+  constructor(id, name, placeBorn, canThrowBall, canDodgeBall, team, mascot){
+    super(id, name, placeBorn, canThrowBall, canDodgeBall);
     this.team = team;
     this.mascot = mascot;
   }
@@ -79,10 +81,13 @@ class Teammate extends Player {
 
 // DOM: Display list of people 
 const listPeopleChoices = () => {
-  const listElement = document.getElementById('people')
-
+  const listElement = document.getElementById('people');
+  const playerElement = document.getElementById('players').childElementCount;
+  const blueElement = document.getElementById('blue').childElementCount;
+  const redElement = document.getElementById('red').childElementCount;
+ 
   // prevent duplicates from being displayed
-  if (!listElement.hasChildNodes()) { 
+  if (!listElement.hasChildNodes() && !(playerElement + blueElement + redElement) > 0 ) { 
     arrOfPeople.map(person => {
 
       const li = document.createElement("li")
@@ -96,14 +101,14 @@ const listPeopleChoices = () => {
       li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
       listElement.append(li)
     })
-  }  
+  } 
 }
 
 // ARRAY: Add a person to the list of players
 const makePlayer = (id) => {
   arrOfPeople.filter(person => {
     if (id === person.id) {
-      let newPlayer = new Player(person.id, person.name, person.placeBorn);
+      let newPlayer = new Player(person.id, person.name, person.placeBorn, true, true);
       listOfPlayers.push(newPlayer);
     }
   })
@@ -115,6 +120,12 @@ const removeLi = (id) => {
   let li = document.getElementById(id);
   li.parentNode.removeChild(li);
 }
+
+// DOM: Remove li element
+// const removeSection = (id) => {
+//   let ul = document.getElementById(id);
+//   ul.parentNode.removeParent(ul);
+// } 
 
 // DOM: Display list of available players
 const listPlayerChoices = (person) => {
@@ -130,10 +141,12 @@ const listPlayerChoices = (person) => {
 
     const blueTeamBtn = document.createElement('button');
     blueTeamBtn.innerHTML = 'Blue Team';
+    blueTeamBtn.classList = 'blueBtn';
     blueTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Blue Team', 'Bluejays')} );
 
     const redTeamBtn = document.createElement("button");
     redTeamBtn.innerHTML = 'Red Team';
+    redTeamBtn.classList = 'redBtn';
     redTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Red Team', 'Cardinals')} );
 
     li.appendChild(blueTeamBtn)
@@ -152,12 +165,12 @@ const makeTeammate = (id, team, mascot) => {
     .filter(player => player.id === playerId)
     .map(player => {
       if (team === 'Blue Team') { 
-        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, team, mascot);
+        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, player.canThrowBall, player.canDodgeBall, team, mascot);
         blueTeam.push(newTeammate);
         listBlueTeam(player);
       }
       else if (team === 'Red Team') {
-        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, team, mascot);
+        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, player.canThrowBall, player.canDodgeBall, team, mascot);
         redTeam.push(newTeammate);
         listRedTeam(player);
       }
@@ -192,3 +205,16 @@ const listRedTeam = (player) => {
       listElement.append(li)
     })
 };
+
+// UNIT TESTS //
+
+// if (typeof describe === 'function') {
+//   describe('makePlayer', () => {
+//     it('should set canDodgeBall to true upon instantiation', () => {
+//       assert.equal(Player.canThrowBall, 'true');
+//     });
+//     it('should set canDodgeBall upon instantiation', () => {
+//       assert.equal(Player.canDodgeBall, 'true');
+//     });
+//   });
+// } 
