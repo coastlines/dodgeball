@@ -2,8 +2,8 @@
 
 #### ONE 
 
-1. Use the *class keyword* to create a template of a *Player* -- DONE
-   that requires:
+1. Use the *class keyword* to create a template of a *Player*
+   that requires: -- DONE
     * canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience (this can vary)
 
 #### TWO
