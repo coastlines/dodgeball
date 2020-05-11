@@ -206,15 +206,26 @@ const listRedTeam = (player) => {
     })
 };
 
-// UNIT TESTS //
+//UNIT TESTS //
 
-// if (typeof describe === 'function') {
-//   describe('makePlayer', () => {
-//     it('should set canDodgeBall to true upon instantiation', () => {
-//       assert.equal(Player.canThrowBall, 'true');
-//     });
-//     it('should set canDodgeBall upon instantiation', () => {
-//       assert.equal(Player.canDodgeBall, 'true');
-//     });
-//   });
-// } 
+if (typeof describe === 'function') {
+  describe('makePlayer', () => {
+    it('should set canDodgeBall to true upon instantiation', () => {
+      assert.equal(Player.canThrowBall, 'true');
+    });
+    it('should set canDodgeBall to true upon instantiation', () => {
+      assert.equal(Player.canDodgeBall, 'true');
+    });
+  });
+} 
+
+if (typeof describe === 'function') {
+  describe('makeTeammate', () => {
+    it('should set the correct team upon instantiation', () => {
+      assert.equal(Teammate.team, 'Red Team');
+    });
+    it('should set the correct mascot upon instantiation', () => {
+      assert.equal(Teammate.mascot, 'Cardinals');
+    });
+  });
+} 
