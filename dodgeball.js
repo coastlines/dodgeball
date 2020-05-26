@@ -1,3 +1,6 @@
+"use strict"
+// INITIAL PLAYERS //
+
 const arrOfPeople = [
   {
     id: 2,
@@ -50,75 +53,179 @@ const arrOfPeople = [
   },
 ]
 
+// NEW ARRAYS //
 const listOfPlayers = []
 const blueTeam = []
 const redTeam = []
 
-class player {
-  constructor(){
-    
-  }
-}
-class blueTeammate {
-  constructor(){}
-}
-class redTeammate {
-  constructor(){}
-}
-
-class dodgeBallPlayer {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
-    this.canThrowBall = null;
-    this.canDodgeBall = null;
-    this.hasPaid = null;
-    this.isHealthy = null;
-    this.yearsExperience = null;
+// CLASS CONSTRUCTORS //
+class Player {
+  constructor(id, name, placeBorn, canThrowBall, canDodgeBall){
+    this.id = id;
+    this.name = name;
+    this.placeBorn = placeBorn;
+    this.canThrowBall = canThrowBall;
+    this.canDodgeBall = canThrowBall;
   }
 }
 
+class Teammate extends Player {
+  constructor(id, name, placeBorn, canThrowBall, canDodgeBall, team, mascot){
+    super(id, name, placeBorn, canThrowBall, canDodgeBall);
+    this.team = team;
+    this.mascot = mascot;
+  }
+}
+
+// FUNCTIONS //
+
+// DOM: Display list of people 
 const listPeopleChoices = () => {
-  const listElement = document.getElementById('people')
-  arrOfPeople.map(person => {
-    const li = document.createElement("li")
-    const button = document.createElement("button")
-    button.innerHTML = "Make Player"
-    button.addEventListener('click', function() {makePlayer(person.id)} )
-    li.appendChild(button)
-    li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+  const listElement = document.getElementById('people');
+  const playerElement = document.getElementById('players').childElementCount;
+  const blueElement = document.getElementById('blue').childElementCount;
+  const redElement = document.getElementById('red').childElementCount;
+ 
+  // prevent duplicates from being displayed
+  if (!listElement.hasChildNodes() && !(playerElement + blueElement + redElement) > 0 ) { 
+    arrOfPeople.map(person => {
+
+      const li = document.createElement("li")
+      li.id = person.id // create li id based on person id
+
+      const button = document.createElement("button")
+      button.innerHTML = "Make Player"
+      button.addEventListener('click', function() {makePlayer(person.id)} )
+
+      li.appendChild(button)
+      li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+      listElement.append(li)
+    })
+  } 
+}
+
+// ARRAY: Add a person to the list of players
+const makePlayer = (id) => {
+  arrOfPeople.filter(person => {
+    if (id === person.id) {
+      let newPlayer = new Player(person.id, person.name, person.placeBorn, true, true);
+      listOfPlayers.push(newPlayer);
+    }
+  })
+  listPlayerChoices(id);
+}
+
+// DOM: Remove li element
+const removeLi = (id) => {
+  let li = document.getElementById(id);
+  li.parentNode.removeChild(li);
+}
+
+// DOM: Remove li element
+// const removeSection = (id) => {
+//   let ul = document.getElementById(id);
+//   ul.parentNode.removeParent(ul);
+// } 
+
+// DOM: Display list of available players
+const listPlayerChoices = (person) => {
+  let personId = person;
+
+  listOfPlayers
+    .filter(person => person.id === personId)
+    .map(person  => {
+
+    const listElement = document.getElementById('players')
+    const li = document.createElement('li')
+    li.id = person.id
+
+    const blueTeamBtn = document.createElement('button');
+    blueTeamBtn.innerHTML = 'Blue Team';
+    blueTeamBtn.classList = 'blueBtn';
+    blueTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Blue Team', 'Bluejays')} );
+
+    const redTeamBtn = document.createElement("button");
+    redTeamBtn.innerHTML = 'Red Team';
+    redTeamBtn.classList = 'redBtn';
+    redTeamBtn.addEventListener('click', function() {makeTeammate(person.id, 'Red Team', 'Cardinals')} );
+
+    li.appendChild(blueTeamBtn)
+    li.appendChild(redTeamBtn)
+    li.appendChild(document.createTextNode(person.name + " - " + person.placeBorn))
     listElement.append(li)
   })
+  removeLi(person);
 }
 
-const makePlayer = (id) => {
-  console.log(`li ${id} was clicked!`)
-}
+// ARRAY: Add a player to a team
+const makeTeammate = (id, team, mascot) => {
+  let playerId = id;
 
-// ONE //
-//Use the class keyword to create a template of a dodgeBallPlayer
-//that requires canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience
+  listOfPlayers
+    .filter(player => player.id === playerId)
+    .map(player => {
+      if (team === 'Blue Team') { 
+        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, player.canThrowBall, player.canDodgeBall, team, mascot);
+        blueTeam.push(newTeammate);
+        listBlueTeam(player);
+      }
+      else if (team === 'Red Team') {
+        let newTeammate = new Teammate(player.id, player.name, player.placeBorn, player.canThrowBall, player.canDodgeBall, team, mascot);
+        redTeam.push(newTeammate);
+        listRedTeam(player);
+      }
+  });
+  removeLi(id);
+};
 
-// TWO //
-//Push these new dodge ball Player objects into a new array 
-//and then display them in the DOM as available players to pick.
+// DOM: Display blue team
+const listBlueTeam = (player) => {
+  let playerId = player.id;
 
-// THREE //
-//Add a button to each new player that will allow each one to be selected for either Blue Team or Read Team 
-// and now has mascot and teamColor
+  blueTeam
+    .filter(player => player.id === playerId)
+    .map(player => {
+      const listElement = document.getElementById('blue')
+      const li = document.createElement("li")
+      li.appendChild(document.createTextNode(player.name))
+      listElement.append(li)
+    })
+};
 
-// FOUR //
-//Use the this keyword to assign each player to a team with an onclick. Either Blue Team or Red Team.
+// DOM: Display red team
+const listRedTeam = (player) => {
+  let playerId = player.id;
 
-// FIVE //
-//Display the two teams in a new list in the DOM with appropriate titles.
+  redTeam
+    .filter(player => player.id === playerId)
+    .map(player => {
+      const listElement = document.getElementById('red')
+      const li = document.createElement("li")
+      li.appendChild(document.createTextNode(player.name))
+      listElement.append(li)
+    })
+};
 
-// SIX //
-//Create 3 tests for your application.  
-//Use Mocha and Chai to prove a person becomes a player and player becomes a teammate.
+//UNIT TESTS //
 
-// EXTRA
-// Add an input at the top of the Window that allows for a user to add new people!
-// Make a random-izer to automatically select teams for us!
-// Add multiple teams to add players to.
-// Change the color of the text for each color based on the color of their team!
-// Make a button to remove Players from Teams and back to the Players list.
-// Make a button to remove Player from the Players List and move them into the People List.
+if (typeof describe === 'function') {
+  describe('makePlayer', () => {
+    it('should set canDodgeBall to true upon instantiation', () => {
+      assert.equal(Player.canThrowBall, 'true');
+    });
+    it('should set canDodgeBall to true upon instantiation', () => {
+      assert.equal(Player.canDodgeBall, 'true');
+    });
+  });
+} 
+
+if (typeof describe === 'function') {
+  describe('makeTeammate', () => {
+    it('should set the correct team upon instantiation', () => {
+      assert.equal(Teammate.team, 'Red Team');
+    });
+    it('should set the correct mascot upon instantiation', () => {
+      assert.equal(Teammate.mascot, 'Cardinals');
+    });
+  });
+} 
